@@ -1,0 +1,1096 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Mi API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/doctors": {
+            "get": {
+                "summary": "Obtiene todos los doctores",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Doctor"
+                                    }
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": [
+                                            {
+                                                "id_profesional": 1,
+                                                "nombre": "Juan",
+                                                "apellido": "Pérez",
+                                                "correo": "juan.perez@example.com",
+                                                "especialidad": "medicina_interna"
+                                            },
+                                            {
+                                                "id_profesional": 2,
+                                                "nombre": "Ana",
+                                                "apellido": "Gómez",
+                                                "correo": "ana.gomez@example.com",
+                                                "especialidad": "medicina_general"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error del servidor",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Hubo un error al obtener los doctores"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Crea un nuevo doctor",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Doctor"
+                            },
+                            "examples": {
+                                "example-1": {
+                                    "value": {
+                                        "id_profesional": 3,
+                                        "nombre": "Carlos",
+                                        "apellido": "Rodríguez",
+                                        "correo": "carlos.rodriguez@example.com",
+                                        "especialidad": "medicina_interna"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Doctor creado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Doctor"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "id_profesional": 3,
+                                            "nombre": "Carlos",
+                                            "apellido": "Rodríguez",
+                                            "correo": "carlos.rodriguez@example.com",
+                                            "especialidad": "medicina_interna"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error del servidor",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Hubo un error al crear el doctor"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/doctors/{id}": {
+            "get": {
+                "summary": "Obtiene un doctor por ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del doctor",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Doctor"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "id_profesional": 1,
+                                            "nombre": "Juan",
+                                            "apellido": "Pérez",
+                                            "correo": "juan.perez@example.com",
+                                            "especialidad": "medicina_interna"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Doctor no encontrado",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Doctor no encontrado"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error del servidor",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Hubo un error al obtener el doctor"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Actualiza un doctor",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del doctor",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Doctor"
+                            },
+                            "examples": {
+                                "example-1": {
+                                    "value": {
+                                        "nombre": "Juan Actualizado",
+                                        "apellido": "Pérez Actualizado",
+                                        "correo": "juan.perez.actualizado@example.com",
+                                        "especialidad": "medicina_general"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Doctor actualizado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Doctor"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "id_profesional": 1,
+                                            "nombre": "Juan Actualizado",
+                                            "apellido": "Pérez Actualizado",
+                                            "correo": "juan.perez.actualizado@example.com",
+                                            "especialidad": "medicina_general"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Doctor no encontrado",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Doctor no encontrado"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error del servidor",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Hubo un error al actualizar el doctor"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Elimina un doctor",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del doctor",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Doctor eliminado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Doctor eliminado exitosamente"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Doctor no encontrado",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Doctor no encontrado"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error del servidor",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Hubo un error al eliminar el doctor"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pacientes": {
+            "get": {
+                "summary": "Obtiene todos los pacientes",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Paciente"
+                                    }
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": [
+                                            {
+                                                "id_numeroCedula": 1,
+                                                "nombre": "Pedro",
+                                                "apellido": "García",
+                                                "telefono": "1234567890",
+                                                "edad": "1990-01-01"
+                                            },
+                                            {
+                                                "id_numeroCedula": 2,
+                                                "nombre": "María",
+                                                "apellido": "López",
+                                                "telefono": "0987654321",
+                                                "edad": "1995-01-01"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error del servidor",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Hubo un error al obtener los pacientes"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Crea un nuevo paciente",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Paciente"
+                            },
+                            "examples": {
+                                "example-1": {
+                                    "value": {
+                                        "id_numeroCedula": 3,
+                                        "nombre": "Luis",
+                                        "apellido": "Martínez",
+                                        "telefono": "1122334455",
+                                        "edad": "2000-01-01"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Paciente creado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Paciente"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "id_numeroCedula": 3,
+                                            "nombre": "Luis",
+                                            "apellido": "Martínez",
+                                            "telefono": "1122334455",
+                                            "edad": "2000-01-01"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error del servidor",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Hubo un error al crear el paciente"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pacientes/{id}": {
+            "get": {
+                "summary": "Obtiene un paciente por ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del paciente",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Paciente"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "id_numeroCedula": 1,
+                                            "nombre": "Pedro",
+                                            "apellido": "García",
+                                            "telefono": "1234567890",
+                                            "edad": "1990-01-01"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Paciente no encontrado",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Paciente no encontrado"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error del servidor",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Hubo un error al obtener el paciente"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Actualiza un paciente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del paciente",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Paciente"
+                            },
+                            "examples": {
+                                "example-1": {
+                                    "value": {
+                                        "nombre": "Pedro Actualizado",
+                                        "apellido": "García Actualizado",
+                                        "telefono": "0987654321",
+                                        "edad": "1991-01-01"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Paciente actualizado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Paciente"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "id_numeroCedula": 1,
+                                            "nombre": "Pedro Actualizado",
+                                            "apellido": "García Actualizado",
+                                            "telefono": "0987654321",
+                                            "edad": "1991-01-01"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Paciente no encontrado",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Paciente no encontrado"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error del servidor",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Hubo un error al actualizar el paciente"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Elimina un paciente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del paciente",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Paciente eliminado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Paciente eliminado exitosamente"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Paciente no encontrado",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Paciente no encontrado"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error del servidor",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Hubo un error al eliminar el paciente"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/citas": {
+            "get": {
+                "summary": "Obtiene todas las citas",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Cita"
+                                    }
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": [
+                                            {
+                                                "fecha_hora": "2023-01-01T10:00:00Z",
+                                                "id_profesional": 1,
+                                                "id_numeroCedula": 1
+                                            },
+                                            {
+                                                "fecha_hora": "2023-01-02T10:00:00Z",
+                                                "id_profesional": 2,
+                                                "id_numeroCedula": 2
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error del servidor",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Hubo un error al obtener las citas"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Crea una nueva cita",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cita"
+                            },
+                            "examples": {
+                                "example-1": {
+                                    "value": {
+                                        "fecha_hora": "2023-01-03T10:00:00Z",
+                                        "id_profesional": 3,
+                                        "id_numeroCedula": 3
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cita creada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cita"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "fecha_hora": "2023-01-03T10:00:00Z",
+                                            "id_profesional": 3,
+                                            "id_numeroCedula": 3
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error del servidor",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Hubo un error al crear la cita"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Actualiza una cita",
+                "parameters": [
+                    {
+                        "name": "profesional",
+                        "in": "query",
+                        "required": true,
+                        "description": "Profesional de la cita",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "paciente",
+                        "in": "query",
+                        "required": true,
+                        "description": "Paciente de la cita",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "fecha",
+                        "in": "query",
+                        "required": true,
+                        "description": "Fecha de la cita",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cita"
+                            },
+                            "examples": {
+                                "example-1": {
+                                    "value": {
+                                        "fecha_hora": "2023-01-02T10:00:00Z",
+                                        "id_profesional": 2,
+                                        "id_numeroCedula": 2
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cita actualizada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cita"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "fecha_hora": "2023-01-02T10:00:00Z",
+                                            "id_profesional": 2,
+                                            "id_numeroCedula": 2
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error del servidor",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Hubo un error al actualizar la cita"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Elimina una cita",
+                "parameters": [
+                    {
+                        "name": "profesional",
+                        "in": "query",
+                        "required": true,
+                        "description": "Profesional de la cita",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "paciente",
+                        "in": "query",
+                        "required": true,
+                        "description": "Paciente de la cita",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "fecha",
+                        "in": "query",
+                        "required": true,
+                        "description": "Fecha de la cita",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cita eliminada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Cita eliminada exitosamente"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error del servidor",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Hubo un error al eliminar la cita"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/citas/unica": {
+            "get": {
+                "summary": "Obtiene una cita unica",
+                "parameters": [
+                    {
+                        "name": "profesional",
+                        "in": "query",
+                        "required": true,
+                        "description": "Profesional de la cita",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "paciente",
+                        "in": "query",
+                        "required": true,
+                        "description": "Paciente de la cita",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "fecha",
+                        "in": "query",
+                        "required": true,
+                        "description": "Fecha de la cita",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cita"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "fecha_hora": "2023-01-01T10:00:00Z",
+                                            "id_profesional": 1,
+                                            "id_numeroCedula": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Cita no encontrada",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Cita no encontrada"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error del servidor",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "message": "Hubo un error al obtener la cita"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Doctor": {
+                "type": "object",
+                "properties": {
+                    "id_profesional": {
+                        "type": "integer",
+                        "description": "ID del doctor"
+                    },
+                    "nombre": {
+                        "type": "string",
+                        "description": "Nombre del doctor"
+                    },
+                    "apellido": {
+                        "type": "string",
+                        "description": "Apellido del doctor"
+                    },
+                    "correo": {
+                        "type": "string",
+                        "description": "Correo del doctor"
+                    },
+                    "especialidad": {
+                        "type": "string",
+                        "enum": [
+                            "medicina_interna",
+                            "medicina_general"
+                        ],
+                        "description": "Especialidad del doctor"
+                    }
+                },
+                "required": [
+                    "id_profesional",
+                    "nombre",
+                    "apellido",
+                    "correo",
+                    "especialidad"
+                ]
+            },
+            "Paciente": {
+                "type": "object",
+                "properties": {
+                    "id_numeroCedula": {
+                        "type": "integer",
+                        "description": "ID del paciente"
+                    },
+                    "nombre": {
+                        "type": "string",
+                        "description": "Nombre del paciente"
+                    },
+                    "apellido": {
+                        "type": "string",
+                        "description": "Apellido del paciente"
+                    },
+                    "telefono": {
+                        "type": "string",
+                        "description": "Teléfono del paciente"
+                    },
+                    "edad": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "Fecha de nacimiento del paciente"
+                    }
+                },
+                "required": [
+                    "id_numeroCedula",
+                    "nombre",
+                    "apellido",
+                    "telefono",
+                    "edad"
+                ]
+            },
+            "Cita": {
+                "type": "object",
+                "properties": {
+                    "fecha_hora": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Fecha y hora de la cita"
+                    },
+                    "id_profesional": {
+                        "type": "integer",
+                        "description": "ID del doctor"
+                    },
+                    "id_numeroCedula": {
+                        "type": "integer",
+                        "description": "ID del paciente"
+                    }
+                },
+                "required": [
+                    "fecha_hora",
+                    "id_profesional",
+                    "id_numeroCedula"
+                ]
+            }
+        }
+    }
+}
