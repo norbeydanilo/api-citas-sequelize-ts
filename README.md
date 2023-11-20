@@ -23,8 +23,8 @@ You can clone this repo as starter project for your Express, MySQL API server
 **1. Clone this repo by running the following command :-**
 
 ```bash
- git clone https://github.com/norbeydanilo/api_typescript_sequelize.git
- cd api_typescript_sequelize
+ git clone https://github.com/norbeydanilo/api-citas-sequelize-ts.git
+ cd api-citas-sequelize-ts
 ```
 
 **2. Install the required package :-**
@@ -146,4 +146,6 @@ Esto te permitirá iniciar tu proyecto con `npm start` y ejecutar tu proyecto en
 
 ¡Y eso es todo! Ahora tienes una base para empezar a construir tu API REST con TypeScript, Node.js, Express.js y Sequelize ORM para MySQL. ¡Buena suerte con tu proyecto! 🚀
 
-> Norbey Danilo Muñoz-Cañón, 2023.
+> Create by Norbey Danilo Muñoz Cañón, 2023.
+>
+> The idea of ​​intellectual property is fundamentally wrong. Knowledge belongs to all people!
