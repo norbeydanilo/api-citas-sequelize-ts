@@ -74,11 +74,13 @@ export const updateCita: RequestHandler = async (req, res, next) => {
       return;
     } else {
       await Cita.update(req.body, { where: { fecha_hora: fechaDate, id_profesional: profesional, id_numeroCedula: paciente } });
-      res.status(200).json({ message: 'Cita actualizada exitosamente'});
+      res.status(200).json({
+        message: 'Cita actualizada exitosamente'
+      });
     }
   } catch (error) {
     const err = error as Error;
-    res.status(500).json({ message: 'Hubo un error al actualizar la cita', error: err.message });
+    res.status(500).json({ message: 'Hubo un error al actualizar la cita', error: err.stack });
   }
 };
 

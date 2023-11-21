@@ -823,9 +823,7 @@
                                 "examples": {
                                     "example-1": {
                                         "value": {
-                                            "fecha_hora": "2023-01-02T10:00:00Z",
-                                            "id_profesional": 2,
-                                            "id_numeroCedula": 2
+                                            "message": "Cita actualizada exitosamente"
                                         }
                                     }
                                 }
